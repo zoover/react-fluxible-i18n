@@ -1,0 +1,31 @@
+{
+  "name": "react-fluxible-i18n",
+  "version": "0.0.1",
+  "description": "A simple i18n translation & localization library for React+Fluxible applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zoover",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zoover/react-fluxible-i18n.git"
+  },
+  "license": "ISC",
+  "keywords": [
+    "flux",
+    "fluxible",
+    "i18n",
+    "react",
+    "translation",
+    "localization"
+  ],
+  "dependencies": {
+    "fluxible": "^1.0",
+    "fluxible-addons-react": "^0.2",
+    "intl": "^1.0",
+    "intl-locales-supported": "git+https://github.com/zoover/intl-locales-supported.git",
+    "moment": "^2.10",
+    "react": "^0.14"
+  }
+}
