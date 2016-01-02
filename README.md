@@ -4,7 +4,7 @@ A simple i18n translation &amp; localization library for React+Fluxible applicat
 ## Installation
 
 ```
-npm install react-fluxible-i18n --save-dev
+npm install react-fluxible-i18n --save
 ```
 
 ## Usage
