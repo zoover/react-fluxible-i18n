@@ -101,7 +101,7 @@ I18n.l(1385856000000, {dateFormat: 'date.long'}); // returns '1 december 2013' f
 
 The localize component and helper support all date formatting options as provided by the Javascript `moment` library. For the full list of options, see http://momentjs.com/docs/#/displaying/format/.
 
-#### numbers
+#### Numbers
 
 The prefered way of localizing number is also by using the `Localize` component:
 ```javascript
