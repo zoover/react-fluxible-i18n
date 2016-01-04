@@ -29,11 +29,17 @@ actionContext.dispatch('LOAD_TRANSLATIONS',
     en: {
       application: {
         title: 'Awesome app with i18n!'
-      } 
+      },
+      date: {
+        long: 'MMMM Do, YYYY'
+      }
     },
     nl: {
       application: {
         title: 'Toffe app met i18n!'
+      },
+      date: {
+        long: 'D MMMM YYYY'
       }
     }
   }
@@ -52,66 +58,74 @@ The prefered way to have translated texts in your app is by using the `Translate
 import React from 'react';
 import {Translate} from 'react-fluxible-i18n';
 
-FancyHeader = React.createClass({
+SomeComponent = React.createClass({
   render: function() {
     return (
-      <h1>
-        <Translate value="application.title"/>
-      </h1>
-    );
+      <Translate value="application.title"/>
+    ); // returns '<span>Toffe app met i18n!</span>' for locale 'nl'
   }
 });
 ```
 
 If for some reason, you cannot use the component, you can use the `I18n.t` helper instead:
 ```javascript
-import React from 'react';
 import {I18n} from 'react-fluxible-i18n';
-
-FancyInput = React.createClass({
-  render: function() {
-    return (
-      <input placeholder={I18n.t('application.title')}/>
-    );
-  }
-});
+I18n.t('application.title'); // returns 'Toffe app met i18n!' for locale 'nl'
 ```
 
 ### Localize
 
-Currently, this library only supports localizing numbers. The prefered way of doing this is by using the `Localize` component:
+This library supports the localization of both dates and numbers. 
+
+#### Dates
+
+The prefered way of localizing dates is by using the `Localize` component:
 ```javascript
 import React from 'react';
 import {Localize} from 'react-fluxible-i18n';
 
-FancyCurrency = React.createClass({
+SomeComponent = React.createClass({
   render: function() {
     return (
-      <div>
-        <Localize value={10/3} options={{currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2}}/>
-      </div>
-    );
+      <Localize value="2015-09-03" dateFormat="date.long"/>
+    ); // returns '<span>3 september 2015</span> for locale 'nl'
   }
 });
 ```
 
-Again, if for some reason, you cannot use the component, there is the `I18n.l` helper to help you out:
+Also here, If for some reason, you cannot use the component, there is the `I18n.l` helper to help you out:
+```javascript
+import {I18n} from 'react-fluxible-i18n';
+I18n.l(1385856000000, {dateFormat: 'date.long'}); // returns '1 december 2013' for locale 'nl'
+```
+
+The localize component and helper support all date formatting options as provided by the Javascript `moment` library. For the full list of options, see http://momentjs.com/docs/#/displaying/format/.
+
+#### numbers
+
+The prefered way of localizing number is also by using the `Localize` component:
 ```javascript
 import React from 'react';
-import {I18n} from 'react-fluxible-i18n';
+import {Localize} from 'react-fluxible-i18n';
 
-FancyMeta = React.createClass({
+SomeComponent = React.createClass({
   render: function() {
     return (
-      <meta name="description" content={I18n.l(Math.PI, {maximumFractionDigits: 2})}/>
-    );
+      <Localize value={10/3} options={{style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2}}/>
+    ); // returns '<span>€ 3,33</span> for locale 'nl'
   }
 });
 ```
 
-The localize component and helper support all options as provided by the Javascript built-in `Intl.NumberFormat` object. For the full list of options, see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat.
+Again, if for some reason, you cannot use the component, the `I18n.l` helper will help you out:
+```javascript
+import {I18n} from 'react-fluxible-i18n';
+I18n.l(Math.PI, {maximumFractionDigits: 2}); // returns '3,14' for locale 'nl'
+```
+
+The localize component and helper support all options for number formatting as provided by the Javascript built-in `Intl.NumberFormat` object. For the full list of options, see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat.
 
 ## Future plans
 
 * Replacements for translations, e.g.: `Good morning, %{name}!`
-* Localization of dates and times
+* Add tests
