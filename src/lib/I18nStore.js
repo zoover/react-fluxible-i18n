@@ -1,7 +1,5 @@
-'use strict';
-
-const BaseStore = require('fluxible/addons/BaseStore');
-const I18n = require('./I18n')
+import BaseStore from 'fluxible/addons/BaseStore';
+import I18n from './I18n';
 
 class I18nStore extends BaseStore {
   constructor(dispatcher) {
@@ -15,16 +13,16 @@ class I18nStore extends BaseStore {
     this.locale = loc;
     this.emitChange();
   }
-  
+
   loadTranslations(translations) {
     this.translations = translations;
     this.emitChange();
   }
-  
+
   getLocale() {
     return this.locale;
   }
-  
+
   getTranslations() {
     return this.translations;
   }
@@ -45,8 +43,8 @@ class I18nStore extends BaseStore {
 I18nStore.storeName = 'I18nStore';
 
 I18nStore.handlers = {
-  'SET_LOCALE': 'setLocale',
-  'LOAD_TRANSLATIONS': 'loadTranslations'
+  SET_LOCALE: 'setLocale',
+  LOAD_TRANSLATIONS: 'loadTranslations'
 };
 
-module.exports = I18nStore;
+export default I18nStore;

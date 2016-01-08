@@ -1,23 +1,19 @@
-'use strict';
+import moment from 'moment';
+import intlLocalesSupported from 'intl-locales-supported';
+import IntlPolyfill from 'intl';
 
-const React = require('react');
-const moment = require('moment');
-const intlLocalesSupported = require('intl-locales-supported');
-const IntlPolyfill = require('intl');
-
-module.exports = {
+export default {
   _initialized: false,
   _store: null,
-  
-  t: function(key){
-    if (this._store){
+
+  t(key) {
+    if (this._store) {
       return this._translate(key, this._store.getLocale(), this._store.getTranslations());
-    } else {
-      return key;
     }
+    return key;
   },
-  
-  _translate: function(key, locale, translations) {
+
+  _translate(key, locale, translations) {
     try {
       return this._fetchTranslation(translations, locale + '.' + key);
     } catch (err) {
@@ -25,20 +21,19 @@ module.exports = {
       return key;
     }
   },
-  
-  l: function(value, options){
+
+  l(value, options) {
     if (this._store) {
       return this._localize(value, options, this._store.getLocale());
-    } else {
-      return value;
     }
+    return value;
   },
-  
-  _localize: function(value, options, locale){
-    if (!this._initialized){
+
+  _localize(value, options, locale) {
+    if (!this._initialized) {
       this._initialize(locale);
     }
-    if ('dateFormat' in options){
+    if ('dateFormat' in options) {
       return moment(value).format(this.t(options.dateFormat));
     }
     if (typeof value === 'number') {
@@ -47,22 +42,22 @@ module.exports = {
     console.error('I18n: Localization of ' + value + ' failed');
     return value;
   },
-  
-  _initialize: function(locale) {
-    moment.locale(locale); // set moment to the righ locale
+
+  _initialize(locale) {
+    moment.locale(locale); // set moment to the right locale
     if (!intlLocalesSupported(locale)) {
       // Browser doens't support locale, use polyfill instead
-      require('intl/locale-data/jsonp/' + locale + '.js'); // load the translation file for NumberFormat polyfill
-      Intl.NumberFormat = IntlPolyfill.NumberFormat; // Use polyfill functions instead of build-in ones
-      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat; // Use polyfill functions instead of build-in ones
+      require('intl/locale-data/jsonp/' + locale + '.js');
+      Intl.NumberFormat = IntlPolyfill.NumberFormat;
+      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
     }
     this._initialized = true;
   },
-  
-  _fetchTranslation: function(translations, key) {
-    var _index;
+
+  _fetchTranslation(translations, key) {
+    let _index;
     if (typeof translations === 'undefined') {
-      throw 'not found';
+      throw new Error('not found');
     }
     _index = key.indexOf('.');
     if (_index > -1) {
@@ -71,6 +66,6 @@ module.exports = {
     if (translations[key]) {
       return translations[key];
     }
-    throw 'not found';
+    throw new Error('not found');
   }
 };
