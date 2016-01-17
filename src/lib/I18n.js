@@ -1,5 +1,4 @@
 import moment from 'moment';
-import intlLocalesSupported from 'intl-locales-supported';
 import IntlPolyfill from 'intl';
 
 export default {
@@ -45,11 +44,15 @@ export default {
 
   _initialize(locale) {
     moment.locale(locale); // set moment to the right locale
-    if (!intlLocalesSupported(locale)) {
-      // Browser doens't support locale, use polyfill instead
-      require('intl/locale-data/jsonp/' + locale + '.js');
-      Intl.NumberFormat = IntlPolyfill.NumberFormat;
-      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    // polyfill Intl if needed
+    if (global.Intl) {
+      if ((!Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1) ||
+        !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
+        Intl.NumberFormat = IntlPolyfill.NumberFormat;
+        Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+      }
+    } else {
+      global.Intl = IntlPolyfill;
     }
     this._initialized = true;
   },

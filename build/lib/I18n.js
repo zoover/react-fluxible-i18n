@@ -8,10 +8,6 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _intlLocalesSupported = require('intl-locales-supported');
-
-var _intlLocalesSupported2 = _interopRequireDefault(_intlLocalesSupported);
-
 var _intl = require('intl');
 
 var _intl2 = _interopRequireDefault(_intl);
@@ -57,11 +53,14 @@ exports.default = {
   },
   _initialize: function _initialize(locale) {
     _moment2.default.locale(locale); // set moment to the right locale
-    if (!(0, _intlLocalesSupported2.default)(locale)) {
-      // Browser doens't support locale, use polyfill instead
-      require('intl/locale-data/jsonp/' + locale + '.js');
-      Intl.NumberFormat = _intl2.default.NumberFormat;
-      Intl.DateTimeFormat = _intl2.default.DateTimeFormat;
+    // polyfill Intl if needed
+    if (global.Intl) {
+      if (!Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1 || !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
+        Intl.NumberFormat = _intl2.default.NumberFormat;
+        Intl.DateTimeFormat = _intl2.default.DateTimeFormat;
+      }
+    } else {
+      global.Intl = _intl2.default;
     }
     this._initialized = true;
   },
