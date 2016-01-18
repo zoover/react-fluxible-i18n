@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moment = require('moment');
+var _momentWithLocales = require('moment/min/moment-with-locales');
 
-var _moment2 = _interopRequireDefault(_moment);
+var _momentWithLocales2 = _interopRequireDefault(_momentWithLocales);
 
 var _intl = require('intl');
 
@@ -43,7 +43,7 @@ exports.default = {
       this._initialize(locale);
     }
     if ('dateFormat' in options) {
-      return (0, _moment2.default)(value).format(this.t(options.dateFormat));
+      return (0, _momentWithLocales2.default)(value).format(this.t(options.dateFormat));
     }
     if (typeof value === 'number') {
       return new Intl.NumberFormat(locale, options).format(value);
@@ -52,12 +52,11 @@ exports.default = {
     return value;
   },
   _initialize: function _initialize(locale) {
-    _moment2.default.locale(locale); // set moment to the right locale
+    _momentWithLocales2.default.locale(locale); // set moment to the right locale
     // polyfill Intl if needed
     if (global.Intl) {
-      if (!(Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1) || !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
+      if (!(Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1)) {
         Intl.NumberFormat = _intl2.default.NumberFormat;
-        Intl.DateTimeFormat = _intl2.default.DateTimeFormat;
       }
     } else {
       global.Intl = _intl2.default;

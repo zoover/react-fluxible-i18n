@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
 import IntlPolyfill from 'intl';
 
 export default {
@@ -46,10 +46,8 @@ export default {
     moment.locale(locale); // set moment to the right locale
     // polyfill Intl if needed
     if (global.Intl) {
-      if (!(Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1) ||
-        !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
+      if (!(Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1)) {
         Intl.NumberFormat = IntlPolyfill.NumberFormat;
-        Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
       }
     } else {
       global.Intl = IntlPolyfill;

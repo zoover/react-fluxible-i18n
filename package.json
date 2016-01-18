@@ -21,11 +21,11 @@
     "localization"
   ],
   "dependencies": {
-    "fluxible": "^1.0",
-    "fluxible-addons-react": "^0.2",
+    "fluxible": "^1.0.1",
+    "fluxible-addons-react": "^0.2.0",
     "intl": "^1.0",
-    "moment": "^2.10",
-    "react": "^0.14"
+    "moment": "^2.11.0",
+    "react": "^0.14.2"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
