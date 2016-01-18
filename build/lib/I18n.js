@@ -55,7 +55,7 @@ exports.default = {
     _moment2.default.locale(locale); // set moment to the right locale
     // polyfill Intl if needed
     if (global.Intl) {
-      if (!Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1 || !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
+      if (!(Intl.NumberFormat && Intl.NumberFormat.supportedLocalesOf(locale).length === 1) || !(Intl.DateTimeFormat && Intl.DateTimeFormat.supportedLocalesOf(locale).length === 1)) {
         Intl.NumberFormat = _intl2.default.NumberFormat;
         Intl.DateTimeFormat = _intl2.default.DateTimeFormat;
       }
