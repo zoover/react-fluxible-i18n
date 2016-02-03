@@ -9,19 +9,6 @@ npm install react-fluxible-i18n --save
 ```
 
 Secondly, register the `I18nStore` in your app:
-
-```javascript
-var Fluxible = require('fluxible');
-var I18nStore = require('react-fluxible-i18n').I18nStore;
-
-var app = new Fluxible({
-  // ...
-});
-
-app.registerStore(I18nStore);
-```
-
-Using ES6 syntax, this will look something like this:
 ```javascript
 import Fluxible from 'fluxible';
 import {I18nStore} from 'react-fluxible-i18n';
