@@ -16,9 +16,9 @@ export default {
   _translate(key, locale, translations, replacements = {}) {
     let translation = '';
     try {
-      translation = this._fetchTranslation(translations, locale + '.' + key);
+      translation = this._fetchTranslation(translations, `${locale}.${key}`);
     } catch (err) {
-      console.error('I18n: Translation ' + locale + '.' + key + ' not found');
+      console.error(`I18n: Translation ${locale}.${key} not found`);
       return key;
     }
     Object.keys(replacements).forEach(replacement => {
@@ -44,7 +44,7 @@ export default {
     if (typeof value === 'number') {
       return new Intl.NumberFormat(locale, options).format(value);
     }
-    console.error('I18n: Localization of ' + value + ' failed');
+    console.error(`I18n: Localization of ${value} failed`);
     return value;
   },
 

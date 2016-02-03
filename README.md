@@ -1,6 +1,8 @@
 # react-fluxible-i18n
 A simple i18n translation &amp; localization library for React+Fluxible applications.
 
+[![npm version](https://badge.fury.io/js/react-fluxible-i18n.svg)](https://badge.fury.io/js/react-fluxible-i18n)
+
 ## Preparation
 
 To start using this library, first install the package:
