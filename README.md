@@ -80,7 +80,7 @@ If for some reason, you cannot use the component, you can use the `I18n.t` helpe
 ```javascript
 import {I18n} from 'react-fluxible-i18n';
 I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
-I18n.t('application.name', {name: 'Aad'}); // => returns '<span>Hallo, Aad!</span>' for locale 'nl'
+I18n.t('application.name', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
 ```
 
 ### Localize
