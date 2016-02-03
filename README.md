@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-fluxible-i18n.svg)](https://badge.fury.io/js/react-fluxible-i18n)
 
-A simple i18n translation &amp; localization library for React+Fluxible applications.
+A simple i18n translation and localization library for React+Fluxible applications.
 
 ## Preparation
 
