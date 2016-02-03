@@ -23,9 +23,9 @@ Localize.propTypes = {
     React.PropTypes.object]).isRequired,
   options: React.PropTypes.object,
   dateFormat: React.PropTypes.string,
-  locale: React.PropTypes.string.isRequired
+  locale: React.PropTypes.string.isRequired,
 };
 
 export default connectToStores(Localize, ['I18nStore'], (context) => ({
-  locale: context.getStore('I18nStore').getLocale()
+  locale: context.getStore('I18nStore').getLocale(),
 }));

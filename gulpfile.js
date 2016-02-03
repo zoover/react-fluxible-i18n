@@ -17,7 +17,7 @@ gulp.task('lint:fix', function() {
 
 gulp.task('build', function() {
   return gulp.src('src/**/*.js')
-    .pipe(babel({presets: ['es2015', 'react']}))
+    .pipe(babel({presets: ['es2015', 'react', 'stage-2']}))
     .pipe(gulp.dest('build/'));
 });
 

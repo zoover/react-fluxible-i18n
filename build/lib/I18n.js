@@ -19,18 +19,28 @@ exports.default = {
   _store: null,
 
   t: function t(key) {
+    var replacements = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
     if (this._store) {
-      return this._translate(key, this._store.getLocale(), this._store.getTranslations());
+      var store = this._store;
+      return this._translate(key, store.getLocale(), store.getTranslations(), replacements);
     }
     return key;
   },
   _translate: function _translate(key, locale, translations) {
+    var replacements = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+    var translation = '';
     try {
-      return this._fetchTranslation(translations, locale + '.' + key);
+      translation = this._fetchTranslation(translations, locale + '.' + key);
     } catch (err) {
       console.error('I18n: Translation ' + locale + '.' + key + ' not found');
       return key;
     }
+    Object.keys(replacements).forEach(function (replacement) {
+      translation = translation.split('%{' + replacement + '}').join(replacements[replacement]);
+    });
+    return translation;
   },
   l: function l(value, options) {
     if (this._store) {

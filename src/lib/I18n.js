@@ -5,20 +5,26 @@ export default {
   _initialized: false,
   _store: null,
 
-  t(key) {
+  t(key, replacements = {}) {
     if (this._store) {
-      return this._translate(key, this._store.getLocale(), this._store.getTranslations());
+      const store = this._store;
+      return this._translate(key, store.getLocale(), store.getTranslations(), replacements);
     }
     return key;
   },
 
-  _translate(key, locale, translations) {
+  _translate(key, locale, translations, replacements = {}) {
+    let translation = '';
     try {
-      return this._fetchTranslation(translations, locale + '.' + key);
+      translation = this._fetchTranslation(translations, locale + '.' + key);
     } catch (err) {
       console.error('I18n: Translation ' + locale + '.' + key + ' not found');
       return key;
     }
+    Object.keys(replacements).forEach(replacement => {
+      translation = translation.split(`%{${replacement}}`).join(replacements[replacement]);
+    });
+    return translation;
   },
 
   l(value, options) {
@@ -68,5 +74,5 @@ export default {
       return translations[key];
     }
     throw new Error('not found');
-  }
+  },
 };

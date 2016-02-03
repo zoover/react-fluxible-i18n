@@ -30,7 +30,7 @@ class I18nStore extends BaseStore {
   dehydrate() {
     return {
       locale: this.locale,
-      translations: this.translations
+      translations: this.translations,
     };
   }
 
@@ -44,7 +44,7 @@ I18nStore.storeName = 'I18nStore';
 
 I18nStore.handlers = {
   SET_LOCALE: 'setLocale',
-  LOAD_TRANSLATIONS: 'loadTranslations'
+  LOAD_TRANSLATIONS: 'loadTranslations',
 };
 
 export default I18nStore;

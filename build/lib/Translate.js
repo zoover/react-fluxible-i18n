@@ -1,5 +1,7 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
@@ -36,9 +38,18 @@ var Translate = function (_React$Component) {
   }
 
   _createClass(Translate, [{
+    key: 'otherProps',
+    value: function otherProps() {
+      var result = _extends({}, this.props);
+      delete result.value;
+      delete result.locale;
+      delete result.translations;
+      return result;
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('span', {}, _I18n2.default._translate(this.props.value, this.props.locale, this.props.translations));
+      return _react2.default.createElement('span', {}, _I18n2.default._translate(this.props.value, this.props.locale, this.props.translations, this.otherProps()));
     }
   }]);
 
