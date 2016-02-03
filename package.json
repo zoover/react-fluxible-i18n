@@ -1,6 +1,6 @@
 {
   "name": "react-fluxible-i18n",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A simple i18n translation & localization library for React+Fluxible applications.",
   "main": "./build/index.js",
   "scripts": {
