@@ -74,11 +74,10 @@ exports.default = {
     this._initialized = true;
   },
   _fetchTranslation: function _fetchTranslation(translations, key) {
-    var _index = undefined;
+    var _index = key.indexOf('.');
     if (typeof translations === 'undefined') {
       throw new Error('not found');
     }
-    _index = key.indexOf('.');
     if (_index > -1) {
       return this._fetchTranslation(translations[key.substring(0, _index)], key.substr(_index + 1));
     }

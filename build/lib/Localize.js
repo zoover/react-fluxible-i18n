@@ -1,7 +1,5 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -30,17 +28,20 @@ var Localize = function (_React$Component) {
   _inherits(Localize, _React$Component);
 
   function Localize() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Localize);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Localize).apply(this, arguments));
-  }
-
-  _createClass(Localize, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement('span', {}, _I18n2.default._localize(this.props.value, this.props.dateFormat ? { dateFormat: this.props.dateFormat } : this.props.options, this.props.locale));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
     }
-  }]);
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Localize)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.render = function () {
+      return _react2.default.createElement('span', {}, _I18n2.default._localize(_this.props.value, _this.props.dateFormat ? { dateFormat: _this.props.dateFormat } : _this.props.options, _this.props.locale));
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
   return Localize;
 }(_react2.default.Component);
@@ -51,7 +52,6 @@ Localize.propTypes = {
   dateFormat: _react2.default.PropTypes.string,
   locale: _react2.default.PropTypes.string.isRequired
 };
-
 exports.default = (0, _connectToStores2.default)(Localize, ['I18nStore'], function (context) {
   return {
     locale: context.getStore('I18nStore').getLocale()

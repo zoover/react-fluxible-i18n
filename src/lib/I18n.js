@@ -62,11 +62,10 @@ export default {
   },
 
   _fetchTranslation(translations, key) {
-    let _index;
+    const _index = key.indexOf('.');
     if (typeof translations === 'undefined') {
       throw new Error('not found');
     }
-    _index = key.indexOf('.');
     if (_index > -1) {
       return this._fetchTranslation(translations[key.substring(0, _index)], key.substr(_index + 1));
     }
