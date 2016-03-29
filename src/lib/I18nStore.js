@@ -1,21 +1,26 @@
 import BaseStore from 'fluxible/addons/BaseStore';
-import I18n from './I18n';
+import { I18n } from 'react-i18nify';
 
-class I18nStore extends BaseStore {
+export default class I18nStore extends BaseStore {
+  static storeName = 'I18nStore';
+  static handlers = {
+    SET_LOCALE: 'handleSetLocale',
+    LOAD_TRANSLATIONS: 'handleLoadTranslations',
+  };
+
   constructor(dispatcher) {
     super(dispatcher);
-    this.locale = 'en';
-    this.translations = {};
-    I18n._store = this;
+    this._setLocale('en');
+    this._loadTranslations({});
   }
 
-  setLocale(loc) {
-    this.locale = loc;
+  handleSetLocale(locale) {
+    this._setLocale(locale);
     this.emitChange();
   }
 
-  loadTranslations(translations) {
-    this.translations = translations;
+  handleLoadTranslations(translations) {
+    this._loadTranslations(translations);
     this.emitChange();
   }
 
@@ -34,17 +39,18 @@ class I18nStore extends BaseStore {
     };
   }
 
-  rehydrate(state) {
-    this.locale = state.locale;
-    this.translations = state.translations;
+  rehydrate({ locale, translations }) {
+    this._setLocale(locale);
+    this._loadTranslations(translations);
+  }
+
+  _setLocale(locale) {
+    this.locale = locale;
+    I18n.setLocale(this.locale);
+  }
+
+  _loadTranslations(translations) {
+    this.translations = translations;
+    I18n.loadTranslations(this.translations);
   }
 }
-
-I18nStore.storeName = 'I18nStore';
-
-I18nStore.handlers = {
-  SET_LOCALE: 'setLocale',
-  LOAD_TRANSLATIONS: 'loadTranslations',
-};
-
-export default I18nStore;

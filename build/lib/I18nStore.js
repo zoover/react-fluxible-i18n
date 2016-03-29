@@ -10,9 +10,7 @@ var _BaseStore2 = require('fluxible/addons/BaseStore');
 
 var _BaseStore3 = _interopRequireDefault(_BaseStore2);
 
-var _I18n = require('./I18n');
-
-var _I18n2 = _interopRequireDefault(_I18n);
+var _reactI18nify = require('react-i18nify');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,22 +28,21 @@ var I18nStore = function (_BaseStore) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(I18nStore).call(this, dispatcher));
 
-    _this.locale = 'en';
-    _this.translations = {};
-    _I18n2.default._store = _this;
+    _this._setLocale('en');
+    _this._loadTranslations({});
     return _this;
   }
 
   _createClass(I18nStore, [{
-    key: 'setLocale',
-    value: function setLocale(loc) {
-      this.locale = loc;
+    key: 'handleSetLocale',
+    value: function handleSetLocale(locale) {
+      this._setLocale(locale);
       this.emitChange();
     }
   }, {
-    key: 'loadTranslations',
-    value: function loadTranslations(translations) {
-      this.translations = translations;
+    key: 'handleLoadTranslations',
+    value: function handleLoadTranslations(translations) {
+      this._loadTranslations(translations);
       this.emitChange();
     }
   }, {
@@ -68,9 +65,24 @@ var I18nStore = function (_BaseStore) {
     }
   }, {
     key: 'rehydrate',
-    value: function rehydrate(state) {
-      this.locale = state.locale;
-      this.translations = state.translations;
+    value: function rehydrate(_ref) {
+      var locale = _ref.locale;
+      var translations = _ref.translations;
+
+      this._setLocale(locale);
+      this._loadTranslations(translations);
+    }
+  }, {
+    key: '_setLocale',
+    value: function _setLocale(locale) {
+      this.locale = locale;
+      _reactI18nify.I18n.setLocale(this.locale);
+    }
+  }, {
+    key: '_loadTranslations',
+    value: function _loadTranslations(translations) {
+      this.translations = translations;
+      _reactI18nify.I18n.loadTranslations(this.translations);
     }
   }]);
 
@@ -78,10 +90,8 @@ var I18nStore = function (_BaseStore) {
 }(_BaseStore3.default);
 
 I18nStore.storeName = 'I18nStore';
-
 I18nStore.handlers = {
-  SET_LOCALE: 'setLocale',
-  LOAD_TRANSLATIONS: 'loadTranslations'
+  SET_LOCALE: 'handleSetLocale',
+  LOAD_TRANSLATIONS: 'handleLoadTranslations'
 };
-
 exports.default = I18nStore;
