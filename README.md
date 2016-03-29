@@ -1,7 +1,7 @@
-# react-i18n-fluxible
+# react-fluxible-i18n
 Simple i18n translation and localization components and helpers for React+Fluxible applications.
 
-[![npm version](https://badge.fury.io/js/react-i18n-fluxible.svg)](https://badge.fury.io/js/react-i18n-fluxible)
+[![npm version](https://badge.fury.io/js/react-fluxible-i18n.svg)](https://badge.fury.io/js/react-fluxible-i18n)
 
 Note: If you are not using Fluxible, you can use [react-i18nify](https://github.com/zoover/react-i18nify) instead.
 
@@ -9,13 +9,13 @@ Note: If you are not using Fluxible, you can use [react-i18nify](https://github.
 
 First install the package:
 ```
-npm i react-i18n-fluxible --save
+npm i react-fluxible-i18n --save
 ```
 
 Secondly, register the `I18nStore` in your app:
 ```javascript
 var Fluxible = require('fluxible');
-var I18nStore = require('react-i18n-fluxible').I18nStore;
+var I18nStore = require('react-fluxible-i18n').I18nStore;
 
 const app = new Fluxible({
   // ...
@@ -53,15 +53,15 @@ Finally, you should set the locale to be used:
 context.dispatch('SET_LOCALE', 'nl');
 ```
 
-Now you're all set up to start unleashing the power of `react-i18n-fluxible`!
+Now you're all set up to start unleashing the power of `react-fluxible-i18n`!
 
 ## Components
 
 The easiest way to translate or localize in your React components is by using the `Translate` and `Localize` components:
 ```javascript
 var React = require('react');
-var Translate = require('react-i18n-fluxible').Translate;
-var Localize = require('react-i18n-fluxible').Localize;
+var Translate = require('react-fluxible-i18n').Translate;
+var Localize = require('react-fluxible-i18n').Localize;
 
 var AwesomeComponent = React.createClass({
   render: function() {
@@ -85,7 +85,7 @@ var AwesomeComponent = React.createClass({
 
 If for some reason, you cannot use the components, you can use the `I18n.t` and `I18n.l` helpers instead:
 ```javascript
-var I18n = require('react-i18n-fluxible').I18n;
+var I18n = require('react-fluxible-i18n').I18n;
 
 I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
 I18n.t('application.name', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
