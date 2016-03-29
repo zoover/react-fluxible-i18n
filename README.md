@@ -24,7 +24,7 @@ const app = new Fluxible({
 app.registerStore(I18nStore);
 ```
 
-Next, load the translations to be used, for example in `app.js`:
+Next, load the translations to be used, by dispatching an event:
 ```javascript
 context.dispatch('LOAD_TRANSLATIONS', {
   en: {
@@ -48,7 +48,7 @@ context.dispatch('LOAD_TRANSLATIONS', {
 });
 ```
 
-Finally, you should set the locale to be used:
+Finally, you should set the locale to be used, also by dispatching an event:
 ```javascript
 context.dispatch('SET_LOCALE', 'nl');
 ```
