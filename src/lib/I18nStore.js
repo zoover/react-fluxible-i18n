@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: "off" */
+
 import BaseStore from 'fluxible/addons/BaseStore';
 import { I18n } from 'react-i18nify';
 

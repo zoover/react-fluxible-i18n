@@ -34,7 +34,10 @@ context.dispatch('LOAD_TRANSLATIONS', {
     },
     date: {
       long: 'MMMM Do, YYYY'
-    }
+    },
+    export: 'Export %{count} items'
+    export_0: 'Nothing to export',
+    export_1: 'Export %{count} item',
   },
   nl: {
     application: {
@@ -43,7 +46,10 @@ context.dispatch('LOAD_TRANSLATIONS', {
     },
     date: {
       long: 'D MMMM YYYY'
-    }
+    },
+    export: 'Exporteer %{count} dingen'
+    export_0: 'Niks te exporteren',
+    export_1: 'Exporteer %{count} ding',
   }
 });
 ```
@@ -75,6 +81,10 @@ var AwesomeComponent = React.createClass({
           // => returns '<span>3 september 2015</span> for locale 'nl'
         <Localize value={10/3} options={{style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2}}/>
           // => returns '<span>€ 3,33</span> for locale 'nl'
+        <Translate value="export" count={1} />
+          // => returns '<span>Exporteer 1 ding</span> for locale 'nl'
+        <Translate value="export" count={2} />
+          // => returns '<span>Exporteer 2 dingen</span> for locale 'nl'
       </div>
     );
   }
@@ -88,7 +98,9 @@ If for some reason, you cannot use the components, you can use the `I18n.t` and 
 var I18n = require('react-fluxible-i18n').I18n;
 
 I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
-I18n.t('application.name', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
+I18n.t('application.hello', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
+I18n.t('export', {count: 0}); // => returns 'Niks te exporteren' for locale 'nl'
+I18n.t('application.weird_key'); // => returns 'Weird key' as translation is missing
 
 I18n.l(1385856000000, { dateFormat: 'date.long' }); // => returns '1 december 2013' for locale 'nl'
 I18n.l(Math.PI, { maximumFractionDigits: 2 }); // => returns '3,14' for locale 'nl'
