@@ -1,9 +1,10 @@
 # react-fluxible-i18n
 Simple i18n translation and localization components and helpers for React+Fluxible applications.
 
-[![npm version](https://badge.fury.io/js/react-fluxible-i18n.svg)](https://badge.fury.io/js/react-fluxible-i18n)
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
 
 Note: If you are not using Fluxible, you can use [react-i18nify](https://github.com/zoover/react-i18nify) instead.
+If you are using Redux, you can use [react-redux-i18n](https://github.com/zoover/react-redux-i18n) instead.
 
 ## Preparation
 
@@ -24,9 +25,9 @@ const app = new Fluxible({
 app.registerStore(I18nStore);
 ```
 
-Next, load the translations to be used, by dispatching an event:
+Finally, set the translations and locales to be used, by dispatching events:
 ```javascript
-context.dispatch('LOAD_TRANSLATIONS', {
+context.dispatch('SET_TRANSLATIONS', {
   en: {
     application: {
       title: 'Awesome app with i18n!',
@@ -52,10 +53,7 @@ context.dispatch('LOAD_TRANSLATIONS', {
     export_1: 'Exporteer %{count} ding',
   }
 });
-```
 
-Finally, you should set the locale to be used, also by dispatching an event:
-```javascript
 context.dispatch('SET_LOCALE', 'nl');
 ```
 
@@ -101,6 +99,7 @@ I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
 I18n.t('application.hello', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
 I18n.t('export', {count: 0}); // => returns 'Niks te exporteren' for locale 'nl'
 I18n.t('application.weird_key'); // => returns 'Weird key' as translation is missing
+I18n.t('application', {name: 'Aad'}); // => returns {hello: "Hallo, Aad!", title: "Toffe app met i18n!"} for locale 'nl'
 
 I18n.l(1385856000000, { dateFormat: 'date.long' }); // => returns '1 december 2013' for locale 'nl'
 I18n.l(Math.PI, { maximumFractionDigits: 2 }); // => returns '3,14' for locale 'nl'
@@ -111,3 +110,8 @@ I18n.l(Math.PI, { maximumFractionDigits: 2 }); // => returns '3,14' for locale '
 The localize component and helper support all date formatting options as provided by the Javascript `moment` library. For the full list of options, see http://momentjs.com/docs/#/displaying/format/.
 
 For number formatting, the localize component and helper support all options as provided by the Javascript built-in `Intl.NumberFormat` object. For the full list of options, see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat.
+
+[downloads-image]: http://img.shields.io/npm/dm/react-fluxible-i18n.svg
+
+[npm-url]: https://npmjs.org/package/react-fluxible-i18n
+[npm-image]: http://img.shields.io/npm/v/react-fluxible-i18n.svg

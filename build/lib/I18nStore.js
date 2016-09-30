@@ -29,7 +29,7 @@ var I18nStore = function (_BaseStore) {
     var _this = _possibleConstructorReturn(this, (I18nStore.__proto__ || Object.getPrototypeOf(I18nStore)).call(this, dispatcher));
 
     _this._setLocale('en');
-    _this._loadTranslations({});
+    _this._setTranslations({});
     return _this;
   }
 
@@ -40,9 +40,9 @@ var I18nStore = function (_BaseStore) {
       this.emitChange();
     }
   }, {
-    key: 'handleLoadTranslations',
-    value: function handleLoadTranslations(translations) {
-      this._loadTranslations(translations);
+    key: 'handleSetTranslations',
+    value: function handleSetTranslations(translations) {
+      this._setTranslations(translations);
       this.emitChange();
     }
   }, {
@@ -70,7 +70,7 @@ var I18nStore = function (_BaseStore) {
       var translations = _ref.translations;
 
       this._setLocale(locale);
-      this._loadTranslations(translations);
+      this._setTranslations(translations);
     }
   }, {
     key: '_setLocale',
@@ -79,10 +79,10 @@ var I18nStore = function (_BaseStore) {
       _reactI18nify.I18n.setLocale(this.locale);
     }
   }, {
-    key: '_loadTranslations',
-    value: function _loadTranslations(translations) {
+    key: '_setTranslations',
+    value: function _setTranslations(translations) {
       this.translations = translations;
-      _reactI18nify.I18n.loadTranslations(this.translations);
+      _reactI18nify.I18n.setTranslations(this.translations);
     }
   }]);
 
@@ -92,6 +92,10 @@ var I18nStore = function (_BaseStore) {
 I18nStore.storeName = 'I18nStore';
 I18nStore.handlers = {
   SET_LOCALE: 'handleSetLocale',
-  LOAD_TRANSLATIONS: 'handleLoadTranslations'
+  SET_TRANSLATIONS: 'handleSetTranslations',
+  /**
+   * @deprecated
+   */
+  LOAD_TRANSLATIONS: 'handleSetTranslations'
 };
 exports.default = I18nStore;

@@ -3,17 +3,35 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Localize = exports.Translate = exports.I18n = exports.I18nStore = undefined;
 
 var _I18nStore = require('./lib/I18nStore');
 
-var _I18nStore2 = _interopRequireDefault(_I18nStore);
+Object.defineProperty(exports, 'I18nStore', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_I18nStore).default;
+  }
+});
 
 var _reactI18nify = require('react-i18nify');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+Object.defineProperty(exports, 'I18n', {
+  enumerable: true,
+  get: function get() {
+    return _reactI18nify.I18n;
+  }
+});
+Object.defineProperty(exports, 'Translate', {
+  enumerable: true,
+  get: function get() {
+    return _reactI18nify.Translate;
+  }
+});
+Object.defineProperty(exports, 'Localize', {
+  enumerable: true,
+  get: function get() {
+    return _reactI18nify.Localize;
+  }
+});
 
-exports.I18nStore = _I18nStore2.default;
-exports.I18n = _reactI18nify.I18n;
-exports.Translate = _reactI18nify.Translate;
-exports.Localize = _reactI18nify.Localize;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

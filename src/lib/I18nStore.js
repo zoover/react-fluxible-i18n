@@ -7,13 +7,17 @@ export default class I18nStore extends BaseStore {
   static storeName = 'I18nStore';
   static handlers = {
     SET_LOCALE: 'handleSetLocale',
-    LOAD_TRANSLATIONS: 'handleLoadTranslations',
+    SET_TRANSLATIONS: 'handleSetTranslations',
+    /**
+     * @deprecated
+     */
+    LOAD_TRANSLATIONS: 'handleSetTranslations',
   };
 
   constructor(dispatcher) {
     super(dispatcher);
     this._setLocale('en');
-    this._loadTranslations({});
+    this._setTranslations({});
   }
 
   handleSetLocale(locale) {
@@ -21,8 +25,8 @@ export default class I18nStore extends BaseStore {
     this.emitChange();
   }
 
-  handleLoadTranslations(translations) {
-    this._loadTranslations(translations);
+  handleSetTranslations(translations) {
+    this._setTranslations(translations);
     this.emitChange();
   }
 
@@ -43,7 +47,7 @@ export default class I18nStore extends BaseStore {
 
   rehydrate({ locale, translations }) {
     this._setLocale(locale);
-    this._loadTranslations(translations);
+    this._setTranslations(translations);
   }
 
   _setLocale(locale) {
@@ -51,8 +55,8 @@ export default class I18nStore extends BaseStore {
     I18n.setLocale(this.locale);
   }
 
-  _loadTranslations(translations) {
+  _setTranslations(translations) {
     this.translations = translations;
-    I18n.loadTranslations(this.translations);
+    I18n.setTranslations(this.translations);
   }
 }
