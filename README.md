@@ -66,8 +66,8 @@ Now you're all set up to start unleashing the power of `react-fluxible-i18n`!
 The easiest way to translate or localize in your React components is by using the `Translate` and `Localize` components:
 ```javascript
 var React = require('react');
-var Translate = require('react-i18nify').Translate;
-var Localize = require('react-i18nify').Localize;
+var Translate = require('react-fluxible-i18n').Translate;
+var Localize = require('react-fluxible-i18n').Localize;
 
 var AwesomeComponent = React.createClass({
   render: function() {
@@ -99,7 +99,7 @@ var AwesomeComponent = React.createClass({
 
 If for some reason, you cannot use the components, you can use the `I18n.t` and `I18n.l` helpers instead:
 ```javascript
-var I18n = require('react-i18nify').I18n;
+var I18n = require('react-fluxible-i18n').I18n;
 
 I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
 I18n.t('application.hello', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
