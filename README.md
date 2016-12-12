@@ -36,9 +36,10 @@ context.dispatch('SET_TRANSLATIONS', {
     date: {
       long: 'MMMM Do, YYYY'
     },
-    export: 'Export %{count} items'
+    export: 'Export %{count} items',
     export_0: 'Nothing to export',
     export_1: 'Export %{count} item',
+    two_lines: 'Line 1<br />Line 2'
   },
   nl: {
     application: {
@@ -48,9 +49,10 @@ context.dispatch('SET_TRANSLATIONS', {
     date: {
       long: 'D MMMM YYYY'
     },
-    export: 'Exporteer %{count} dingen'
+    export: 'Exporteer %{count} dingen',
     export_0: 'Niks te exporteren',
     export_1: 'Exporteer %{count} ding',
+    two_lines: 'Regel 1<br />Regel 2'
   }
 });
 
@@ -64,8 +66,8 @@ Now you're all set up to start unleashing the power of `react-fluxible-i18n`!
 The easiest way to translate or localize in your React components is by using the `Translate` and `Localize` components:
 ```javascript
 var React = require('react');
-var Translate = require('react-fluxible-i18n').Translate;
-var Localize = require('react-fluxible-i18n').Localize;
+var Translate = require('react-i18nify').Translate;
+var Localize = require('react-i18nify').Localize;
 
 var AwesomeComponent = React.createClass({
   render: function() {
@@ -73,6 +75,8 @@ var AwesomeComponent = React.createClass({
       <div>
         <Translate value="application.title"/>
           // => returns '<span>Toffe app met i18n!</span>' for locale 'nl'
+        <Translate value="application.title" style={{ fontWeight: 'bold', fontSize: '14px' }} />
+        // => returns '<span style="font-weight:bold;font-size:14px;">Toffe app met i18n!</span>' for locale 'nl'
         <Translate value="application.hello" name="Aad"/>
           // => returns '<span>Hallo, Aad!</span>' for locale 'nl'
         <Localize value="2015-09-03" dateFormat="date.long"/>
@@ -83,6 +87,8 @@ var AwesomeComponent = React.createClass({
           // => returns '<span>Exporteer 1 ding</span> for locale 'nl'
         <Translate value="export" count={2} />
           // => returns '<span>Exporteer 2 dingen</span> for locale 'nl'
+        <Translate value="two_lines" dangerousHTML />
+          // => returns '<span>Regel 1<br />Regel 2</span>'
       </div>
     );
   }
@@ -93,7 +99,7 @@ var AwesomeComponent = React.createClass({
 
 If for some reason, you cannot use the components, you can use the `I18n.t` and `I18n.l` helpers instead:
 ```javascript
-var I18n = require('react-fluxible-i18n').I18n;
+var I18n = require('react-i18nify').I18n;
 
 I18n.t('application.title'); // => returns 'Toffe app met i18n!' for locale 'nl'
 I18n.t('application.hello', {name: 'Aad'}); // => returns 'Hallo, Aad!' for locale 'nl'
